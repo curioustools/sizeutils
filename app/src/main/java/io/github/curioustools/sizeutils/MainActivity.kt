@@ -1,4 +1,4 @@
-package work.curioustools.sizeutils
+package io.github.curioustools.sizeutils
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -9,11 +9,11 @@ import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import work.curioustools.sizeunit.SizeUnit
-import work.curioustools.sizeunit.Tester
-import work.curioustools.sizeunit.helpers.roundOff
-import work.curioustools.sizeunit.helpers.toMemoryString
-import work.curioustools.sizeutils.databinding.ActivityMainBinding
+import io.github.curioustools.sizeunit.SizeUnit
+import io.github.curioustools.sizeunit.Tester
+import io.github.curioustools.sizeunit.helpers.roundOff
+import io.github.curioustools.sizeunit.helpers.toMemoryString
+import io.github.curioustools.sizeutils.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private val binding by  lazy { ActivityMainBinding.inflate(layoutInflater) }

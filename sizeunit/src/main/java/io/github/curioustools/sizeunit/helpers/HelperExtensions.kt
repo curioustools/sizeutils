@@ -1,13 +1,13 @@
-package work.curioustools.sizeunit.helpers
+package io.github.curioustools.sizeunit.helpers
 
-import work.curioustools.sizeunit.SizeUnit
-import work.curioustools.sizeunit.SizeUnit.Bits
-import work.curioustools.sizeunit.SizeUnit.Bytes
-import work.curioustools.sizeunit.SizeUnit.GB
-import work.curioustools.sizeunit.SizeUnit.KB
-import work.curioustools.sizeunit.SizeUnit.MB
-import work.curioustools.sizeunit.SizeUnit.PB
-import work.curioustools.sizeunit.SizeUnit.TB
+import io.github.curioustools.sizeunit.SizeUnit
+import io.github.curioustools.sizeunit.SizeUnit.Bits
+import io.github.curioustools.sizeunit.SizeUnit.Bytes
+import io.github.curioustools.sizeunit.SizeUnit.GB
+import io.github.curioustools.sizeunit.SizeUnit.KB
+import io.github.curioustools.sizeunit.SizeUnit.MB
+import io.github.curioustools.sizeunit.SizeUnit.PB
+import io.github.curioustools.sizeunit.SizeUnit.TB
 import java.lang.Long.signum
 import java.text.CharacterIterator
 import java.text.StringCharacterIterator

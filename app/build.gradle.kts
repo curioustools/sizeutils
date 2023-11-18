@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "work.curioustools.sizeutils"
+    namespace = "io.github.curioustools.sizeutils"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "work.curioustools.sizeutils"
+        applicationId = "io.github.curioustools.sizeutils"
         minSdk = 19
         targetSdk = 34
         versionCode = 1

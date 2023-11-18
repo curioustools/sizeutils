@@ -1,16 +1,16 @@
-package work.curioustools.sizeunit
+package io.github.curioustools.sizeunit
 
-import work.curioustools.sizeunit.SizeUnit.Companion.DECIMAL_BASE
-import work.curioustools.sizeunit.SizeUnit.Companion.BINARY_BASE
-import work.curioustools.sizeunit.helpers.bits
-import work.curioustools.sizeunit.helpers.bytes
-import work.curioustools.sizeunit.helpers.gb
-import work.curioustools.sizeunit.helpers.kb
-import work.curioustools.sizeunit.helpers.mb
-import work.curioustools.sizeunit.helpers.pb
-import work.curioustools.sizeunit.helpers.roundOff
-import work.curioustools.sizeunit.helpers.tb
-import work.curioustools.sizeunit.helpers.toMemoryString
+import io.github.curioustools.sizeunit.SizeUnit.Companion.DECIMAL_BASE
+import io.github.curioustools.sizeunit.SizeUnit.Companion.BINARY_BASE
+import io.github.curioustools.sizeunit.helpers.bits
+import io.github.curioustools.sizeunit.helpers.bytes
+import io.github.curioustools.sizeunit.helpers.gb
+import io.github.curioustools.sizeunit.helpers.kb
+import io.github.curioustools.sizeunit.helpers.mb
+import io.github.curioustools.sizeunit.helpers.pb
+import io.github.curioustools.sizeunit.helpers.roundOff
+import io.github.curioustools.sizeunit.helpers.tb
+import io.github.curioustools.sizeunit.helpers.toMemoryString
 
 @Deprecated("This is a test class only, not intended for prod use")
 class Tester {

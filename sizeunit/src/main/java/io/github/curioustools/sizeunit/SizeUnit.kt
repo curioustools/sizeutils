@@ -1,22 +1,22 @@
-package work.curioustools.sizeunit
+package io.github.curioustools.sizeunit
 
-import work.curioustools.sizeunit.SizeUnit.BitsIn.ONE_BIT
-import work.curioustools.sizeunit.SizeUnit.BitsIn.ONE_BYTE
+import io.github.curioustools.sizeunit.SizeUnit.BitsIn.ONE_BIT
+import io.github.curioustools.sizeunit.SizeUnit.BitsIn.ONE_BYTE
 
-import work.curioustools.sizeunit.SizeUnit.BitsIn.ONE_KB
-import work.curioustools.sizeunit.SizeUnit.BitsIn.ONE_KiB
+import io.github.curioustools.sizeunit.SizeUnit.BitsIn.ONE_KB
+import io.github.curioustools.sizeunit.SizeUnit.BitsIn.ONE_KiB
 
-import work.curioustools.sizeunit.SizeUnit.BitsIn.ONE_MB
-import work.curioustools.sizeunit.SizeUnit.BitsIn.ONE_MiB
+import io.github.curioustools.sizeunit.SizeUnit.BitsIn.ONE_MB
+import io.github.curioustools.sizeunit.SizeUnit.BitsIn.ONE_MiB
 
-import work.curioustools.sizeunit.SizeUnit.BitsIn.ONE_GB
-import work.curioustools.sizeunit.SizeUnit.BitsIn.ONE_GiB
+import io.github.curioustools.sizeunit.SizeUnit.BitsIn.ONE_GB
+import io.github.curioustools.sizeunit.SizeUnit.BitsIn.ONE_GiB
 
-import work.curioustools.sizeunit.SizeUnit.BitsIn.ONE_TB
-import work.curioustools.sizeunit.SizeUnit.BitsIn.ONE_TiB
+import io.github.curioustools.sizeunit.SizeUnit.BitsIn.ONE_TB
+import io.github.curioustools.sizeunit.SizeUnit.BitsIn.ONE_TiB
 
-import work.curioustools.sizeunit.SizeUnit.BitsIn.ONE_PB
-import work.curioustools.sizeunit.SizeUnit.BitsIn.ONE_PiB
+import io.github.curioustools.sizeunit.SizeUnit.BitsIn.ONE_PB
+import io.github.curioustools.sizeunit.SizeUnit.BitsIn.ONE_PiB
 
 /**
  *
