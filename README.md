@@ -5,7 +5,7 @@
 
 ## SizeUnit
 
-This class can be used just like [TimeUnit](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/TimeUnit.html) from java. 
+This little library can be used just like [TimeUnit](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/TimeUnit.html) from java. It has no dependencies on other libs or even the android framework, so feel free to use in your web,kmm or backend project too!
 
 **0) Installation**
 
