@@ -1,7 +1,7 @@
 package work.curioustools.sizeunit
 
-import work.curioustools.sizeunit.SizeUnits.Companion.DECIMAL_BASE
-import work.curioustools.sizeunit.SizeUnits.Companion.BINARY_BASE
+import work.curioustools.sizeunit.SizeUnit.Companion.DECIMAL_BASE
+import work.curioustools.sizeunit.SizeUnit.Companion.BINARY_BASE
 import work.curioustools.sizeunit.helpers.bits
 import work.curioustools.sizeunit.helpers.bytes
 import work.curioustools.sizeunit.helpers.gb
@@ -22,13 +22,15 @@ class Tester {
             return buildString {
                 appendLine("1. Basic Conversions ============")
                 arrayOf(
-                    SizeUnits.Bits(100_00_00),
-                    SizeUnits.Bytes(1),
-                    SizeUnits.KB(1),
-                    SizeUnits.MB(1),
-                    SizeUnits.GB(1),
-                    SizeUnits.TB(1),
-                    SizeUnits.PB(1),
+                    SizeUnit.Bits(100_00_00),
+                    SizeUnit.Bits(4096_000),
+                    SizeUnit.Bytes(1),
+                    SizeUnit.KB(1),
+                    SizeUnit.MB(1),
+                    SizeUnit.MB(4),
+                    SizeUnit.GB(1),
+                    SizeUnit.TB(1),
+                    SizeUnit.PB(1),
                 ).forEach {
                     val orig = "${it.originalValue} ${it::class.simpleName}"
                     appendLine("$orig = ${it.toBits(DECIMAL_BASE)} b | ${it.toBits(BINARY_BASE)} b")
@@ -55,15 +57,15 @@ class Tester {
                 }
 
                 appendLine("3. Long,Double and Round off notation ===============")
-                SizeUnits.GB(102.97699).let {
+                SizeUnit.Bits(999_999_9).let {
                     val orig = "${it.originalValue} ${it::class.simpleName}"
                     appendLine("$orig: ${it.toBits(BINARY_BASE).toLong()} b | ${it.toBits(BINARY_BASE)} b |  ${it.toBits(BINARY_BASE).toLong().roundOff()} b ")
-                    appendLine("$orig: ${it.toBytes().toLong()} B | ${it.toBytes()} B | ${it.toBytes().toLong().roundOff()} B")
-                    appendLine("$orig: ${it.toKiloBytes().toLong()} KB | ${it.toKiloBytes()} KB | ${it.toKiloBytes().roundOff()} KB")
-                    appendLine("$orig: ${it.toMegaBytes().toLong()} MB | ${it.toMegaBytes()} MB | ${it.toMegaBytes().roundOff()} MB")
-                    appendLine("$orig: ${it.toGigaBytes().toLong()} GB | ${it.toGigaBytes()} GB | ${it.toGigaBytes().roundOff()} GB")
-                    appendLine("$orig: ${it.toTeraBytes().toLong()} TB | ${it.toTeraBytes()} TB | ${it.toTeraBytes().roundOff()} TB")
-                    appendLine("$orig: ${it.toPetaBytes().toLong()} PB | ${it.toPetaBytes()} PB | ${it.toPetaBytes().roundOff()} PB")
+                    appendLine("$orig: ${it.toBytes().toLong()} B | ${it.toBytes()} B | ${it.toBytes().toLong().roundOff(2)} B")
+                    appendLine("$orig: ${it.toKiloBytes().toLong()} KB | ${it.toKiloBytes()} KB | ${it.toKiloBytes().roundOff(2)} KB")
+                    appendLine("$orig: ${it.toMegaBytes().toLong()} MB | ${it.toMegaBytes()} MB | ${it.toMegaBytes().roundOff(2)} MB")
+                    appendLine("$orig: ${it.toGigaBytes().toLong()} GB | ${it.toGigaBytes()} GB | ${it.toGigaBytes().roundOff(2)} GB")
+                    appendLine("$orig: ${it.toTeraBytes().toLong()} TB | ${it.toTeraBytes()} TB | ${it.toTeraBytes().roundOff(2)} TB")
+                    appendLine("$orig: ${it.toPetaBytes().toLong()} PB | ${it.toPetaBytes()} PB | ${it.toPetaBytes().roundOff(2)} PB")
                 }
 
 
@@ -73,7 +75,7 @@ class Tester {
                 while (x > 1) {
                     val memoryStringBinary = x.toMemoryString(BINARY_BASE)
                     val memoryStringDecimal =x.toMemoryString(DECIMAL_BASE)
-                    val sizeUnit = SizeUnits.Bytes(x)
+                    val sizeUnit = SizeUnit.Bytes(x)
                     val sizeUnitBinary = when{
                         memoryStringBinary.contains("P") -> "${sizeUnit.toPetaBytes(BINARY_BASE).roundOff()} PiB"
                         memoryStringBinary.contains("T") -> "${sizeUnit.toTeraBytes(BINARY_BASE).roundOff()} TiB"

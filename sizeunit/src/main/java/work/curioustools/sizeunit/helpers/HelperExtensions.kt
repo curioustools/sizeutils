@@ -1,13 +1,13 @@
 package work.curioustools.sizeunit.helpers
 
-import work.curioustools.sizeunit.SizeUnits
-import work.curioustools.sizeunit.SizeUnits.Bits
-import work.curioustools.sizeunit.SizeUnits.Bytes
-import work.curioustools.sizeunit.SizeUnits.GB
-import work.curioustools.sizeunit.SizeUnits.KB
-import work.curioustools.sizeunit.SizeUnits.MB
-import work.curioustools.sizeunit.SizeUnits.PB
-import work.curioustools.sizeunit.SizeUnits.TB
+import work.curioustools.sizeunit.SizeUnit
+import work.curioustools.sizeunit.SizeUnit.Bits
+import work.curioustools.sizeunit.SizeUnit.Bytes
+import work.curioustools.sizeunit.SizeUnit.GB
+import work.curioustools.sizeunit.SizeUnit.KB
+import work.curioustools.sizeunit.SizeUnit.MB
+import work.curioustools.sizeunit.SizeUnit.PB
+import work.curioustools.sizeunit.SizeUnit.TB
 import java.lang.Long.signum
 import java.text.CharacterIterator
 import java.text.StringCharacterIterator
@@ -33,13 +33,16 @@ fun Number.roundOff(precision: Int = 3): Double {
 /**
  * Helper Extension to convert a number to a size unit of nearest ceiling. so, if we have a number
  * 922, it will show as 922 B. if we have a number 9223, it will show as 9.2KB.if we have a number
- * 9223372, it will show as 9.0 MB
+ * 9223372, it will show as 9.0 MB.
+ *
+ * Copied gratefully from [https://stackoverflow.com/a/3758880](https://stackoverflow.com/a/3758880)
+ * and converted to kotlin with a few tinkering. please upvote the original answer
  */
-fun Long.toMemoryString(base:Int = SizeUnits.DECIMAL_BASE, enableI:Boolean=false): String {
+fun Long.toMemoryString(base:Int = SizeUnit.DECIMAL_BASE, enableI:Boolean=false): String {
     var bytes = this
-    val charI = if( enableI) "i" else ""
+    val charI = if(enableI) "i" else ""
 
-    if(base == SizeUnits.BINARY_BASE){
+    if(base == SizeUnit.BINARY_BASE){
         val absB = if (bytes == Long.MIN_VALUE) Long.MAX_VALUE else abs(bytes)
         if (absB < base) return "$bytes B"
         var value = absB

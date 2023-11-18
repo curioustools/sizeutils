@@ -1,22 +1,22 @@
 package work.curioustools.sizeunit
 
-import work.curioustools.sizeunit.SizeUnits.BitsIn.ONE_BIT
-import work.curioustools.sizeunit.SizeUnits.BitsIn.ONE_BYTE
+import work.curioustools.sizeunit.SizeUnit.BitsIn.ONE_BIT
+import work.curioustools.sizeunit.SizeUnit.BitsIn.ONE_BYTE
 
-import work.curioustools.sizeunit.SizeUnits.BitsIn.ONE_KB
-import work.curioustools.sizeunit.SizeUnits.BitsIn.ONE_KiB
+import work.curioustools.sizeunit.SizeUnit.BitsIn.ONE_KB
+import work.curioustools.sizeunit.SizeUnit.BitsIn.ONE_KiB
 
-import work.curioustools.sizeunit.SizeUnits.BitsIn.ONE_MB
-import work.curioustools.sizeunit.SizeUnits.BitsIn.ONE_MiB
+import work.curioustools.sizeunit.SizeUnit.BitsIn.ONE_MB
+import work.curioustools.sizeunit.SizeUnit.BitsIn.ONE_MiB
 
-import work.curioustools.sizeunit.SizeUnits.BitsIn.ONE_GB
-import work.curioustools.sizeunit.SizeUnits.BitsIn.ONE_GiB
+import work.curioustools.sizeunit.SizeUnit.BitsIn.ONE_GB
+import work.curioustools.sizeunit.SizeUnit.BitsIn.ONE_GiB
 
-import work.curioustools.sizeunit.SizeUnits.BitsIn.ONE_TB
-import work.curioustools.sizeunit.SizeUnits.BitsIn.ONE_TiB
+import work.curioustools.sizeunit.SizeUnit.BitsIn.ONE_TB
+import work.curioustools.sizeunit.SizeUnit.BitsIn.ONE_TiB
 
-import work.curioustools.sizeunit.SizeUnits.BitsIn.ONE_PB
-import work.curioustools.sizeunit.SizeUnits.BitsIn.ONE_PiB
+import work.curioustools.sizeunit.SizeUnit.BitsIn.ONE_PB
+import work.curioustools.sizeunit.SizeUnit.BitsIn.ONE_PiB
 
 /**
  *
@@ -45,8 +45,8 @@ import work.curioustools.sizeunit.SizeUnits.BitsIn.ONE_PiB
  *       child classes. its a unit and not a response status.
  *    4. We used base class param instead of just the child class to have the param/runtime
  *       param because the user might need to access the original value again.
- * 3. Binary and Decimal Base : Many memory systems use  decimal systems for representing memory .
- *    where 1kb = 1000 bytes. however other systems use  1 kb = 1024 bytes and so forth.
+ * 3. Binary and Decimal Base : Many memory systems use  SI systems for representing memory .
+ *    where 1kb = 1000 bytes. however other systems use IC systems, where  1 kb = 1024 bytes and so forth.
  *    so we provided the ability to choose the base for conversion in the hands of the user. the
  *    default is 1000
  *
@@ -55,7 +55,7 @@ import work.curioustools.sizeunit.SizeUnits.BitsIn.ONE_PiB
  *   provided a default value in  function itself
  *
  */
-abstract class SizeUnits(open val originalValue: Number) {
+abstract class SizeUnit(open val originalValue: Number) {
 
     object BitsIn {
         const val ONE_BIT: Long = 1
@@ -89,31 +89,31 @@ abstract class SizeUnits(open val originalValue: Number) {
     fun toPetaBytes(base: Int = DECIMAL_BASE) = (toBits(base).toDouble()) / (if (base == DECIMAL_BASE) ONE_PB else ONE_PiB)
 
 
-    data class Bits(override val originalValue: Number) : SizeUnits(originalValue) {
+    data class Bits(override val originalValue: Number) : SizeUnit(originalValue) {
         override fun toBits(base: Int) = originalValue.toDouble() * ONE_BIT
     }
 
-    data class Bytes(override val originalValue: Number) : SizeUnits(originalValue) {
+    data class Bytes(override val originalValue: Number) : SizeUnit(originalValue) {
         override fun toBits(base: Int) = originalValue.toDouble() * ONE_BYTE
     }
 
-    data class KB(override val originalValue: Number) : SizeUnits(originalValue) {
+    data class KB(override val originalValue: Number) : SizeUnit(originalValue) {
         override fun toBits(base: Int) = originalValue.toDouble() * (if (base == DECIMAL_BASE) ONE_KB else ONE_KiB)
     }
 
-    data class MB(override val originalValue: Number) : SizeUnits(originalValue) {
+    data class MB(override val originalValue: Number) : SizeUnit(originalValue) {
         override fun toBits(base: Int) = originalValue.toDouble() * (if (base == DECIMAL_BASE) ONE_MB else ONE_MiB)
     }
 
-    data class GB(override val originalValue: Number) : SizeUnits(originalValue) {
+    data class GB(override val originalValue: Number) : SizeUnit(originalValue) {
         override fun toBits(base: Int) = originalValue.toDouble() * (if (base == DECIMAL_BASE) ONE_GB else ONE_GiB)
     }
 
-    data class TB(override val originalValue: Number) : SizeUnits(originalValue) {
+    data class TB(override val originalValue: Number) : SizeUnit(originalValue) {
         override fun toBits(base: Int) = originalValue.toDouble() * (if (base == DECIMAL_BASE) ONE_TB else ONE_TiB)
     }
 
-    data class PB(override val originalValue: Number) : SizeUnits(originalValue) {
+    data class PB(override val originalValue: Number) : SizeUnit(originalValue) {
         override fun toBits(base: Int) = originalValue.toDouble() * (if (base == DECIMAL_BASE) ONE_PB else ONE_PiB)
     }
 

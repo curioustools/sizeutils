@@ -9,7 +9,7 @@ import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import work.curioustools.sizeunit.SizeUnits
+import work.curioustools.sizeunit.SizeUnit
 import work.curioustools.sizeunit.Tester
 import work.curioustools.sizeunit.helpers.roundOff
 import work.curioustools.sizeunit.helpers.toMemoryString
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                     btAddOrReplace.text = "Update File"
 
                     tvSize.isVisible = true
-                    tvSize.text = "${size.toMemoryString()} | ${SizeUnits.Bytes(size).toMegaBytes().roundOff(3)}MB"
+                    tvSize.text = "${size.toMemoryString()} | ${SizeUnit.Bytes(size).toMegaBytes().roundOff(3)}MB"
 
                 }
                 else{
