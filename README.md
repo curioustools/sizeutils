@@ -39,7 +39,7 @@ You can also use the inline function which looks more prettier:
 4.mb.toPetaBytes()            //  4.0E-9 PB
 ```
 
-**2) Base Conversion** : Many memory systems use  SI systems for representing memory , where 1kb = 1000 bytes. however other systems use IEC systems, where  1 kib = 1024 bytes and so forth. So we gave the ability to convert in the hands of the user. default is DECIMAL_BASE(i.e 1000)
+**2) Base Conversion** : Many memory systems use  SI standard for representing memory , where 1kb = 1024 bytes. however other systems use IEC standard, where  1 kib = 1000 bytes and so forth. So we gave the ability to convert in the hands of the user. default is DECIMAL_BASE(i.e 1000)
 
 
 ```kotlin
