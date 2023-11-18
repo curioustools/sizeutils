@@ -71,7 +71,28 @@ class Tester {
                 var x = 9223372036854775807 //largest long value
                 appendLine("largest long value is  : 9223372036854775807")
                 while (x > 1) {
-                    appendLine("$x = ${x.toMemoryString()} | ${x.toMemoryString(base = DECIMAL_BASE, showI = true)}")
+                    val memoryStringBinary = x.toMemoryString(BINARY_BASE)
+                    val memoryStringDecimal =x.toMemoryString(DECIMAL_BASE)
+                    val sizeUnit = SizeUnits.Bytes(x)
+                    val sizeUnitBinary = when{
+                        memoryStringBinary.contains("P") -> "${sizeUnit.toPetaBytes(BINARY_BASE).roundOff()} PiB"
+                        memoryStringBinary.contains("T") -> "${sizeUnit.toTeraBytes(BINARY_BASE).roundOff()} TiB"
+                        memoryStringBinary.contains("G") -> "${sizeUnit.toGigaBytes(BINARY_BASE).roundOff()} GiB"
+                        memoryStringBinary.contains("M") -> "${sizeUnit.toMegaBytes(BINARY_BASE).roundOff()} MiB"
+                        memoryStringBinary.contains("K") -> "${sizeUnit.toKiloBytes(BINARY_BASE).roundOff()} KiB"
+                        else -> "${sizeUnit.toBytes(BINARY_BASE).roundOff()} B"
+                    }
+
+                    val sizeUnitDecimal = when{
+                        memoryStringDecimal.contains("P") -> "${sizeUnit.toPetaBytes(DECIMAL_BASE).roundOff()} PB"
+                        memoryStringDecimal.contains("T") -> "${sizeUnit.toTeraBytes(DECIMAL_BASE).roundOff()} TB"
+                        memoryStringDecimal.contains("G") -> "${sizeUnit.toGigaBytes(DECIMAL_BASE).roundOff()} GB"
+                        memoryStringDecimal.contains("M") -> "${sizeUnit.toMegaBytes(DECIMAL_BASE).roundOff()} MB"
+                        memoryStringDecimal.contains("K") -> "${sizeUnit.toKiloBytes(DECIMAL_BASE).roundOff()} KB"
+                        else -> "${sizeUnit.toBytes(DECIMAL_BASE).roundOff()} B"
+                    }
+
+                    appendLine("$x =  $memoryStringDecimal(actual:$sizeUnitDecimal) \t\t\t|\t\t\t $memoryStringBinary(actual:$sizeUnitBinary)")
                     x /= 10
                 }
 
