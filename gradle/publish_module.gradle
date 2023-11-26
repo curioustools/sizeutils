@@ -1,0 +1,125 @@
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+def props = new Properties()
+props.load(new FileInputStream(rootProject.file('a_secrets/publish.properties')))
+
+//secrets
+def ossrhPassword = props?.getProperty("ossrhPassword") ?: System.getenv("ossrhPassword") ?: ""
+def ossrhUsername = props?.getProperty("ossrhUsername") ?: System.getenv("ossrhUsername") ?: ""
+
+// lib info
+def ARTIFACT = project.name
+def GROUP = props?.getProperty("GROUP") ?: System.getenv("GROUP") ?: ""
+def ALL_LIBS_VERSION = props?.getProperty("ALL_LIBS_VERSION") ?: System.getenv("ALL_LIBS_VERSION") ?: ""
+
+//common: used in publications task
+def POM_URL = props?.getProperty("POM_URL") ?: System.getenv("POM_URL") ?: ""
+def POM_SCM_URL = props?.getProperty("POM_SCM_URL") ?: System.getenv("POM_SCM_URL") ?: ""
+def POM_SCM_CONNECTION = props?.getProperty("POM_SCM_CONNECTION") ?: System.getenv("POM_SCM_CONNECTION") ?: ""
+def POM_SCM_DEV_CONNECTION = props?.getProperty("POM_SCM_DEV_CONNECTION") ?: System.getenv("POM_SCM_DEV_CONNECTION") ?: ""
+
+//common-metadata: used in publications task
+def POM_INCEPTION_YEAR = props?.getProperty("POM_INCEPTION_YEAR") ?: System.getenv("POM_INCEPTION_YEAR") ?: ""
+def POM_DESCRIPTION = props?.getProperty("POM_DESCRIPTION") ?: System.getenv("POM_DESCRIPTION") ?: ""
+def POM_DEVELOPER_ID = props?.getProperty("POM_DEVELOPER_ID") ?: System.getenv("POM_DEVELOPER_ID") ?: ""
+def POM_DEVELOPER_NAME = props?.getProperty("POM_DEVELOPER_NAME") ?: System.getenv("POM_DEVELOPER_NAME") ?: ""
+def POM_DEVELOPER_EMAIL = props?.getProperty("POM_DEVELOPER_EMAIL") ?: System.getenv("POM_DEVELOPER_EMAIL") ?: ""
+def POM_LICENSE_NAME = props?.getProperty("POM_LICENSE_NAME") ?: System.getenv("POM_LICENSE_NAME") ?: ""
+def POM_LICENSE_URL = props?.getProperty("POM_LICENSE_URL") ?: System.getenv("POM_LICENSE_URL") ?: ""
+def POM_LICENSE_DIST = props?.getProperty("POM_LICENSE_DIST") ?: System.getenv("POM_LICENSE_DIST") ?: ""
+
+
+
+task javaSourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from sourceSets.main.java.srcDirs
+
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}
+
+task javaDocs(type: Javadoc) {
+    source = sourceSets.main.allJava
+    classpath += project.files(sourceSets.main.compileClasspath)
+    options.encoding 'UTF-8'
+}
+
+task javaDocsJar(type: Jar, dependsOn: javaDocs) {
+    archiveClassifier.set('javadoc')
+    from javaDocs.destinationDir
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            java(MavenPublication) {
+                from components.java
+
+                artifact javaSourcesJar
+                artifact javaDocsJar
+
+                groupId GROUP
+                version ALL_LIBS_VERSION //or LIB_VERSION and add `ext {LIB_VERSION="sizeunit"}` in module build.gradle
+                artifactId ARTIFACT //or MODULE_NAME and add `ext {MODULE_NAME="sizeunit"}` in module build.gradle
+
+                pom {
+                    name = artifactId
+                    description = POM_DESCRIPTION
+                    url = POM_URL
+                    inceptionYear = POM_INCEPTION_YEAR
+                    licenses {
+                        license {
+                            distribution = POM_LICENSE_DIST
+                            name = POM_LICENSE_NAME
+                            url = POM_LICENSE_URL
+                        }
+                    }
+                    scm {
+                        connection = POM_SCM_CONNECTION
+                        url = POM_SCM_URL
+                        developerConnection = POM_SCM_DEV_CONNECTION
+                    }
+                    developers {
+                        developer {
+                            id = POM_DEVELOPER_ID
+                            name = POM_DEVELOPER_NAME
+                            email = POM_DEVELOPER_EMAIL
+                        }
+                    }
+                }
+            }
+        }
+        repositories {
+            maven {
+                name = "SonatypeSnapshot"
+
+                def releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+
+                credentials {
+                    username ossrhUsername
+                    password ossrhPassword
+                }
+            }
+
+            maven {
+                name = "sonatype"
+
+                def releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+
+                credentials {
+                    username ossrhUsername
+                    password ossrhPassword
+                }
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications
+}
