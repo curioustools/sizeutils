@@ -1,4 +1,3 @@
-
 plugins {
     id("org.jetbrains.kotlin.jvm")
 }
@@ -6,3 +5,5 @@ plugins {
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(8))
 }
+
+apply from: project.rootDir.path + "/gradle/publish_module.gradle"
