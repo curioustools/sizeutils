@@ -6,4 +6,4 @@ java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(8))
 }
 
-apply from: project.rootDir.path + "/gradle/publish_module.gradle"
+apply from: project.rootDir.path + "/gradle/publish_java_artifact.gradle"
