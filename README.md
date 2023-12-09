@@ -13,7 +13,7 @@ This little library can be used just like [TimeUnit](https://docs.oracle.com/jav
 ```kotlin
  implementation("io.github.curioustools.sizeutils:sizeunit:<latest_version>")
 ```
-latest version is : ![Maven Central](https://img.shields.io/maven-central/v/io.github.curioustools.sizeutils/sizeunit)
+latest version is (don't add 'v') : [![Maven Central](https://img.shields.io/maven-central/v/io.github.curioustools.sizeutils/sizeunit)](https://mvnrepository.com/artifact/io.github.curioustools.sizeutils/sizeunit/1.0.0)
 
 
 
